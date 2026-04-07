@@ -1,7 +1,11 @@
 aid: endeavor
-url: https://raw.githubusercontent.com/api-evangelist/endeavor/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/endeavor/refs/heads/main/apis.yml
 modified: '2026-03-21'
 apis: []
 common:
   - type: Website
     url: https://www.endeavor.com
+description: >-
+  Endeavor Capital How to Win Set Goals Stay Focused Take Some Chances Trust Your
+  Vision Learn More.
