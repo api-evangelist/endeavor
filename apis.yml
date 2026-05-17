@@ -8,7 +8,7 @@ description: >-
   marketing, and licensing businesses were rebranded as WME Group. This
   repository tracks Endeavor as a corporate entity; no public developer APIs
   are currently published.
-type: Contract
+kind: contract
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
