@@ -101,6 +101,16 @@ apis:
       - type: ToolCrosswalk
         url: mcp/endeavor-tool-crosswalk.yml
 common:
+  - type: Twitter
+    url: https://x.com/Endeavor
+  - type: Instagram
+    url: https://www.instagram.com/endeavor/
+  - type: Subsidiary
+    url: https://www.wmeagency.com/
+  - type: Subsidiary
+    url: https://imglicensing.com/
+  - type: Subsidiary
+    url: https://www.pantheonmedia.com/
   - type: Authentication
     url: authentication/endeavor-authentication.yml
   - type: DomainSecurity
