@@ -1,0 +1,37 @@
+generated: '2026-09-06'
+method: generated
+source: >-
+  Generated from openapi/endeavor-content-api-openapi.yml. Every operationId referenced by a skill
+  was verified present in that contract before the skill was written; nothing is invented.
+provider: Endeavor / WME Group
+api: WME Group Content API (WordPress REST wp/v2)
+base_url: https://wmegrp.com/wp-json
+skills:
+- name: endeavor-read-corporate-announcements
+  file: skills/endeavor-read-corporate-announcements.md
+  description: >-
+    Read WME Group corporate announcements and press releases as JSON, with correct pagination,
+    embedded media and error handling.
+  operations:
+  - getPosts
+  - getPostsById
+  - getCategories
+  - getMediaById
+  auth: none
+  writes: false
+- name: endeavor-search-wme-group-site
+  file: skills/endeavor-search-wme-group-site.md
+  description: >-
+    Search everything wmegrp.com publishes and resolve typed results to full records, instead of
+    scraping HTML.
+  operations:
+  - getSearch
+  - getTypes
+  - getTaxonomies
+  - getPagesById
+  auth: none
+  writes: false
+note: >-
+  Only read flows are packaged. The write surface of this API is authentication-gated, offers no
+  idempotency, and includes an irreversible media delete — there is no safe agent flow to package
+  against it, and no credentials are issued to the public.

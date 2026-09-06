@@ -1,0 +1,137 @@
+generated: '2026-09-06'
+method: derived
+source: >-
+  Derived from openapi/endeavor-content-api-openapi.yml (itself transcribed from
+  https://wmegrp.com/wp-json/) plus live anonymous response-header observation on 2026-09-06.
+  Endeavor / WME Group publishes no API conventions documentation of its own; the semantics below
+  are WordPress core REST behaviour observed on the company's host, not a company-stated contract.
+scope: >-
+  The only API surface Endeavor / WME Group serves is the WordPress REST API on wmegrp.com. There is
+  no product API, so there is no company convention document to search for.
+auth_style:
+  anonymous_read: true
+  write_scheme: HTTP Basic (WordPress Application Passwords) or logged-in cookie + X-WP-Nonce header
+  header: Authorization / X-WP-Nonce
+  docs: null
+pagination:
+  style: page-number
+  params:
+  - name: page
+    default: 1
+  - name: per_page
+    default: 10
+    maximum: 100
+  - name: offset
+  response_headers:
+  - X-WP-Total
+  - X-WP-TotalPages
+  link_header: true
+  link_rels:
+  - next
+  - prev
+  observed: >-
+    GET https://wmegrp.com/wp-json/wp/v2/posts?per_page=1 returned X-WP-Total: 6, X-WP-TotalPages: 6
+    and Link: <...&page=2>; rel="next" on 2026-09-06.
+  verified: probed
+field_selection:
+  supported: true
+  params:
+  - _fields
+  - _embed
+  - context (view | embed | edit)
+  note: >-
+    WordPress core sparse-fieldset and embedding parameters. `context=edit` requires authentication.
+metadata:
+  supported: true
+  note: The `meta` object is present on write bodies for post-type routes; registered meta only.
+request_id_tracing:
+  supported: false
+  note: No request-id or correlation header is returned. Nothing to trace a call by.
+versioning:
+  style: namespace-in-path
+  current: wp/v2
+  namespaces_observed:
+  - wp/v2
+  - wp-site-health/v1
+  - wp-block-editor/v1
+  - wp-abilities/v1
+  - mcp
+  - oembed/1.0
+  - rankmath/v1
+  - wordfence/v1
+  - wordfence-login-security/v1
+  note: >-
+    Versioning is WordPress core's namespace convention, not a published company versioning policy.
+error_envelope:
+  format: wordpress-rest
+  rfc9457: false
+  content_type: application/json
+  shape: '{"code": "<slug>", "message": "<human text>", "data": {"status": <http status>}}'
+  catalog: errors/endeavor-problem-types.yml
+  note: >-
+    The HTTP status is repeated inside the body. This is NOT application/problem+json and carries no
+    type URI, instance, or documentation link.
+rate_limit_signaling:
+  published: false
+  headers_observed: []
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header was returned on any observed response, and no
+    limit is documented anywhere. See rate-limits/endeavor-rate-limits.yml.
+caching:
+  observed: 'Cache-Control: public, max-age=604800 on /wp/v2/posts'
+  note: >-
+    A seven-day public cache directive on the content collections — the strongest runtime signal this
+    surface gives, and consistent with a low-change corporate press-release feed.
+cors:
+  access_control_allow_headers: Authorization, X-WP-Nonce, Content-Disposition, Content-MD5, Content-Type
+  access_control_expose_headers: X-WP-Total, X-WP-TotalPages, Link
+idempotency:
+  coverage: none
+  mechanism: null
+  header: null
+  scope: []
+  note: >-
+    No Idempotency-Key header, no request-deduplication mechanism, and no documentation of replay
+    behaviour. The write surface is WordPress core's, which offers no replay protection: a repeated
+    POST to /wp/v2/posts creates a second post. Every write is also authentication-gated and not
+    available to the public, so no agent can exercise it anonymously.
+dry_run_mode:
+  supported: false
+  note: No preview, validate-only or dry-run parameter exists on any route.
+reversibility:
+  grade: documented
+  applies_to: >-
+    The authenticated write surface only. The anonymously-reachable surface is read-only, so for a
+    public consumer reversibility is not applicable.
+  surfaces:
+  - write: createPosts (POST /wp/v2/posts)
+    reversal: deletePostsById (DELETE /wp/v2/posts/{id})
+    mechanism: >-
+      DELETE moves the object to `trash` status rather than removing it; PUT/POST to
+      /wp/v2/posts/{id} with status=publish restores it.
+    window: null
+    window_source: null
+  - write: createPages (POST /wp/v2/pages)
+    reversal: deletePagesById (DELETE /wp/v2/pages/{id})
+    mechanism: Same trash-then-restore behaviour as posts.
+    window: null
+    window_source: null
+  - write: createMedia (POST /wp/v2/media)
+    reversal: deleteMediaById (DELETE /wp/v2/media/{id})
+    mechanism: >-
+      Media deletion is permanent — the route requires `force=true` and there is no trash state for
+      attachments. This write is NOT reversible.
+    window: null
+    window_source: null
+  note: >-
+    Graded `documented`, not `verified`: a reversal path exists and is visible in the route
+    descriptor, but NO retention window is stated anywhere by Endeavor / WME Group. WordPress core's
+    default trash retention is 30 days and is site-configurable, and this site publishes no such
+    statement, so no window is asserted here. Asserting an unstated window is the one error in this
+    step that could cost a caller real data.
+cross_links:
+  errors: errors/endeavor-problem-types.yml
+  lifecycle: lifecycle/endeavor-lifecycle.yml
+  authentication: authentication/endeavor-authentication.yml
+  rate_limits: rate-limits/endeavor-rate-limits.yml
+  conformance: conformance/endeavor-conformance.yml

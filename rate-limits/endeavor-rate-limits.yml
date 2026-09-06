@@ -1,0 +1,31 @@
+generated: '2026-09-06'
+method: probed
+source: >-
+  Live anonymous responses from https://wmegrp.com/wp-json/wp/v2/* on 2026-09-06 plus a search of
+  wmegrp.com for any published limit. Endeavor / WME Group documents no API rate limits anywhere.
+limit_count: 0
+limits: []
+response_headers:
+  observed: []
+  checked:
+  - X-RateLimit-Limit
+  - X-RateLimit-Remaining
+  - X-RateLimit-Reset
+  - RateLimit-Limit
+  - RateLimit-Remaining
+  - RateLimit-Reset
+  - Retry-After
+  note: >-
+    None of these headers appeared on any observed response. There is no runtime rate-limit signal at
+    all, so a client has nothing to back off against except an eventual edge response.
+exhaustion_status: null
+note: >-
+  An honest zero. This is a WordPress content API on a corporate marketing site, not a metered
+  product: there is no plan, no key, and no published limit. Callers are subject to whatever the CDN
+  and origin enforce, which is undocumented and unobservable from outside. The one runtime hint the
+  surface does give is a cache directive, not a limit — Cache-Control: public, max-age=604800 on
+  /wp/v2/posts — so a well-behaved client should cache for a week rather than poll.
+evidence:
+- url: https://wmegrp.com/wp-json/wp/v2/posts?per_page=1
+  status: 200
+  rate_limit_headers: none

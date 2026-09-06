@@ -64,7 +64,7 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Endeavor was a global sports and entertainment company representing talent and owning and operating events, with subsidiaries including WME, IMG, and UFC. Following the 2024 take-private transaction by Silver Lake and the separation of TKO Group Holdings (UFC and WWE), the remaining talent, media, marketing, and licensing businesses were rebranded as WME Group. This repository tracks Endeavor as a corporate entity; no public developer APIs are currently published.
+Endeavor was a global sports and entertainment company representing talent and owning and operating events, with subsidiaries including WME, IMG, and UFC. Following the 2024 take-private transaction by Silver Lake and the separation of TKO Group Holdings (UFC and WWE), the remaining talent, media, marketing, and licensing businesses were rebranded as WME Group. This repository tracks Endeavor as a corporate entity. It publishes no developer program, no API documentation and no OpenAPI; the only machine-readable surfaces on its own hosts are the wmegrp.com WordPress content API, which is anonymously readable, and a live but authentication-gated WordPress MCP Adapter endpoint.
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/endeavor/refs/heads/main/apis.yml)
 
@@ -85,13 +85,65 @@ Endeavor was a global sports and entertainment company representing talent and o
 
 ## APIs
 
-No public developer APIs have been documented. The talent, media, marketing, and licensing businesses now operate under WME Group; UFC and WWE operate under TKO Group Holdings.
+Endeavor / WME Group runs **no developer program**. There is no developer portal, no API
+documentation, no SDK, no published OpenAPI, and no `api.` / `developer.` / `docs.` host in DNS on
+either `wmegrp.com` or `wme.com`. Every `/.well-known/` path returned HTTP 404 on every WME Group
+host probed.
+
+Two machine-readable surfaces do exist on the company's own host, both belonging to its corporate
+site's CMS rather than to a product:
+
+### WME Group Content API (WordPress REST wp/v2)
+
+`https://wmegrp.com/wp-json/wp/v2` — the WordPress REST API behind the corporate site. Anonymously
+readable for press releases (6), corporate pages (11), the media library (177), taxonomies, site
+search and content-type discovery; administrative collections (`users`, `settings`, `themes`,
+`plugins`, `menus`, `widgets`, `templates`) return HTTP 401. Page-number pagination with
+`X-WP-Total` / `X-WP-TotalPages` / RFC 8288 `Link` headers; errors use WordPress's
+`{code,message,data.status}` envelope, not RFC 9457.
+
+- [OpenAPI (derived)](openapi/endeavor-content-api-openapi.yml) — 120 paths, 256 operations,
+  transcribed mechanically from `https://wmegrp.com/wp-json/`. **Not published by the company**
+  (`x-provider-published: false`).
+- [Error catalog](errors/endeavor-problem-types.yml) · [Rate limits](rate-limits/endeavor-rate-limits.yml)
+
+### WME Group MCP Server (WordPress MCP Adapter)
+
+`https://wmegrp.com/wp-json/mcp/mcp-adapter-default-server` — a live Model Context Protocol endpoint
+registered by the site's WordPress MCP Adapter. The namespace index answers HTTP 200; an anonymous
+`tools/list` returns HTTP 401 `rest_forbidden`, as does the backing `wp-abilities/v1` registry, so
+the tool set is **unknown, not empty**.
+
+- [MCP server profile](mcp/endeavor-mcp.yml) · [Tool crosswalk](mcp/endeavor-tool-crosswalk.yml)
+
+## Artifacts
+
+- [Authentication](authentication/endeavor-authentication.yml) ·
+  [Conventions](conventions/endeavor-conventions.yml) ·
+  [Conformance](conformance/endeavor-conformance.yml) ·
+  [Lifecycle](lifecycle/endeavor-lifecycle.yml)
+- [Plans and pricing](plans/endeavor-plans-pricing.yml) (none published) ·
+  [Well-known probe](well-known/endeavor-well-known.yml) (all 404) ·
+  [Domain security](security/endeavor-domain-security.yml)
+- [Agent skills](skills/_index.yml) · [llms.txt](llms/endeavor-llms.txt)
 
 ## Common Properties
 
 - [Website](https://wmegrp.com/)
+- [Privacy Policy](https://wmegrp.com/privacy-policy/)
+- [Terms of Use](https://wmegrp.com/terms-of-use/)
+- [Careers](https://wmeimg.wd1.myworkdayjobs.com/WMEGRP)
+- [LinkedIn](https://www.linkedin.com/company/endeavor-co)
 - [Successor: WME Group](https://wmegrp.com/)
 - [Spinoff: TKO Group Holdings](https://www.tkogrp.com/)
+
+## Businesses
+
+WME Group comprises [WME](https://www.wmeagency.com/) (talent agency),
+[160over90](https://www.160over90.com/) (marketing), [IMG Licensing](https://imglicensing.com/) and
+[Pantheon Media Group](https://www.pantheonmedia.com/) (non-scripted content). None of them publishes
+an API. `img.com` — IMG's sports rights, media and events business — serves a real `llms.txt`, but
+IMG sits under **TKO Group Holdings**, not WME Group, so nothing from that host is credited here.
 
 ## Maintainers
 

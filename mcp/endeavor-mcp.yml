@@ -1,0 +1,79 @@
+generated: '2026-09-06'
+method: probed
+status: published
+source: https://wmegrp.com/wp-json/mcp
+server:
+  name: mcp-adapter-default-server
+  transport: http
+  url: https://wmegrp.com/wp-json/mcp/mcp-adapter-default-server
+  namespace_index: https://wmegrp.com/wp-json/mcp
+  methods:
+  - POST
+  - GET
+  - DELETE
+  implementation: >-
+    WordPress MCP Adapter. The "mcp" namespace is registered in the wmegrp.com WordPress REST route
+    index (https://wmegrp.com/wp-json/) alongside wp-abilities/v1, which is the adapter's backing
+    ability registry.
+  first_party: true
+  note: >-
+    This is the corporate site CMS's MCP endpoint, not a WME Group / Endeavor product MCP server.
+    The company publishes no developer platform and advertises this endpoint nowhere in its
+    documentation; it was found by enumerating https://wmegrp.com/wp-json/. Recorded because it is
+    a real, live, first-party MCP surface on a host the company controls — not because the company
+    markets it.
+authentication:
+  gated: true
+  observed: >-
+    anonymous JSON-RPC tools/list -> HTTP 401
+    {"code":"rest_forbidden","message":"Sorry, you are not allowed to do that.","data":{"status":401}}
+  scheme: WordPress Application Passwords (HTTP Basic) / logged-in cookie + X-WP-Nonce
+  authorization_endpoint: https://wmegrp.com/wp-admin/authorize-application.php
+  oauth_discovery:
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+companion_surface:
+  abilities_api: https://wmegrp.com/wp-json/wp-abilities/v1/abilities
+  abilities_status: 401
+  abilities_routes:
+  - /wp-abilities/v1
+  - /wp-abilities/v1/abilities
+  - /wp-abilities/v1/abilities/{name}
+  - /wp-abilities/v1/abilities/{name}/run
+  - /wp-abilities/v1/categories
+  - /wp-abilities/v1/categories/{slug}
+  note: >-
+    The WordPress Abilities API registry is what the MCP Adapter projects as tools. It is gated the
+    same way (HTTP 401 rest_forbidden), so the published tool set could not be enumerated anonymously.
+sibling_hosts:
+  - host: www.wmeagency.com
+    note: >-
+      WME (the talent agency, a WME Group business) runs the same WordPress stack and registers
+      wp-abilities/v1 in its route index, but registers NO "mcp" namespace — there is no MCP
+      endpoint on that host.
+    wp_json_status: 200
+tools: []
+tools_note: >-
+  NOT AN EMPTY TOOL SET — the tool set is unknown. tools/list is authentication-gated and the site
+  publishes no llms.txt or tool documentation, so there is no public source for tool names or input
+  schemas. Nothing is derived or guessed here. Authenticated introspection would be required.
+x-evidence:
+  fetched: '2026-09-06'
+  url: https://wmegrp.com/wp-json/mcp/mcp-adapter-default-server
+  http_status: 401
+  content_type: application/json; charset=UTF-8
+  discovery_url: https://wmegrp.com/wp-json/
+  discovery_status: 200
+  namespace_index_url: https://wmegrp.com/wp-json/mcp
+  namespace_index_status: 200
+deployment:
+  mode: remote
+  endpoint: https://wmegrp.com/wp-json/mcp/mcp-adapter-default-server
+  install: ''
+  package: ''
+  auth: unknown
+  verified: probed
+  probe: gated
+  checked: '2026-09-06'

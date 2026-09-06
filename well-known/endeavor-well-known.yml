@@ -1,0 +1,137 @@
+generated: '2026-09-06'
+method: probed
+source: >-
+  Direct HTTP probes of every host this record knows — the corporate site (wmegrp.com), the legacy
+  Endeavor corporate domains, and each WME Group operating-brand host linked from the wmegrp.com
+  homepage. Probed with a browser User-Agent.
+note: >-
+  NO /.well-known/ document was served by any host. Every path below returned HTTP 404 (or, on
+  wmegrp.com, a 404 carrying the site's HTML 404 page — an HTML shell is not a document). No
+  WellKnown or SecurityTxt pointer is emitted in apis.yml, because this file records an ABSENCE.
+hosts:
+- host: wmegrp.com
+  role: corporate site (WME Group, the renamed Endeavor Group Holdings) — apis.yml Website
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+  - path: /llms.txt
+    status: 404
+    file: null
+  - path: /robots.txt
+    status: 200
+    file: null
+    note: >-
+      Served, but a bare WordPress robots.txt (Disallow /wp-admin/) with a sitemap_index reference.
+      No AI/LLM crawler policy is expressed. Not a /.well-known/ document; recorded as context.
+- host: www.wme.com
+  role: WME brand redirect host
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+  - path: /llms.txt
+    status: 404
+    file: null
+- host: www.wmeagency.com
+  role: WME talent agency site (WME Group business)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /llms.txt
+    status: 404
+    file: null
+- host: imglicensing.com
+  role: IMG Licensing site (WME Group business)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /llms.txt
+    status: 404
+    file: null
+- host: www.160over90.com
+  role: 160over90 marketing agency site (WME Group business)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /llms.txt
+    status: 404
+    file: null
+- host: www.pantheonmedia.com
+  role: Pantheon Media Group site (WME Group business)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /llms.txt
+    status: 200
+    file: null
+    note: >-
+      Pantheon Media Group DOES serve an llms.txt (4,172 bytes, a hand-written company/label
+      overview). It is Pantheon's own document about Pantheon, not about Endeavor / WME Group, so it
+      is NOT saved into this repo and no LLMsTxt pointer is claimed from it. Recorded so the finding
+      is not lost: the one WME Group business that publishes an llms.txt is Pantheon Media Group.
+excluded_hosts:
+- host: www.img.com
+  reason: >-
+    OWNERSHIP — img.com serves a real llms.txt (HTTP 200) and legacy endeavorgroupholdings.com 301s
+    to it, but IMG (sports rights, media and events) was transferred to TKO Group Holdings, which is
+    already carried in this record as a Spinoff and is a separately listed company. Crediting
+    Endeavor with IMG's published documents would attribute a sibling company's work to this one.
+    Probed for evidence only; nothing saved.
+  llms_txt_status: 200
+  redirect_evidence: https://endeavorgroupholdings.com/ -> 301 -> https://img.com/ -> https://www.img.com/

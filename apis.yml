@@ -6,8 +6,10 @@ description: >-
   UFC. Following the 2024 take-private transaction by Silver Lake and the
   separation of TKO Group Holdings (UFC and WWE), the remaining talent, media,
   marketing, and licensing businesses were rebranded as WME Group. This
-  repository tracks Endeavor as a corporate entity; no public developer APIs
-  are currently published.
+  repository tracks Endeavor as a corporate entity. It publishes no developer program,
+  no API documentation and no OpenAPI; the only machine-readable surfaces on its own hosts are the
+  wmegrp.com WordPress content API, which is anonymously readable, and a live but
+  authentication-gated WordPress MCP Adapter endpoint.
 kind: contract
 deliveryModel:
   model: unknown
@@ -21,16 +23,23 @@ deliveryModel:
   generated: '2026-08-28'
   method: derived
 accessModel:
-  pricing: unknown
-  onboarding: unknown
+  pricing: free
+  onboarding: none
   trial: false
-  try_now: false
-  public: false
-  label: Unknown
-  confidence: low
-  source: []
-  generated: '2026-07-22'
-  method: derived
+  try_now: true
+  public: true
+  label: Free · no signup
+  confidence: medium
+  source:
+  - url: https://wmegrp.com/wp-json/wp/v2/posts?per_page=1
+    status: 200
+    note: >-
+      Anonymous GET returned HTTP 200 with content on 2026-09-06 — the only API surface the company
+      serves is its corporate site's WordPress content API, which needs no key, no account and no
+      plan. There is nothing to buy and nothing to sign up for, so this is free-and-open access to a
+      CMS surface, NOT a commercial API product.
+  generated: '2026-09-06'
+  method: probed
 position: Consuming
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/endeavor.png
@@ -44,12 +53,76 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/endeavor/refs/heads/main/apis.yml
 created: '2026-03-21'
-modified: '2026-04-28'
+modified: '2026-09-06'
 specificationVersion: '0.23'
-apis: []
+apis:
+  - aid: endeavor:content-api
+    name: WME Group Content API (WordPress REST wp/v2)
+    description: >-
+      The corporate site of WME Group — the renamed Endeavor Group Holdings — runs WordPress and
+      exposes the WordPress REST API at https://wmegrp.com/wp-json/. The wp/v2 namespace is
+      anonymously readable and returns the company's press releases, corporate pages, media library,
+      taxonomies and a site-wide search endpoint as JSON. This is the CMS's content API, NOT a
+      product API: Endeavor / WME Group publishes no developer program, no documentation and no
+      OpenAPI. The OpenAPI in this repository was derived mechanically by API Evangelist from the
+      route-discovery document and is stamped x-provider-published: false.
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/endeavor.png
+    humanURL: https://wmegrp.com/
+    baseURL: https://wmegrp.com/wp-json/wp/v2
+    tags:
+      - Content
+      - CMS
+      - Press Releases
+    properties:
+      - type: OpenAPI
+        url: openapi/endeavor-content-api-openapi.yml
+      - type: ErrorCatalog
+        url: errors/endeavor-problem-types.yml
+      - type: RateLimits
+        url: rate-limits/endeavor-rate-limits.yml
+  - aid: endeavor:mcp
+    name: WME Group MCP Server (WordPress MCP Adapter)
+    description: >-
+      A Model Context Protocol server endpoint advertised in the wmegrp.com WordPress REST route
+      index under the "mcp" namespace and served at /wp-json/mcp/mcp-adapter-default-server. The
+      namespace index answers HTTP 200 and the endpoint is live, but it is authentication-gated: an
+      anonymous JSON-RPC tools/list returns HTTP 401 rest_forbidden, as does the companion
+      wp-abilities/v1 registry, so the published tool set could not be enumerated. This is the
+      corporate site CMS's MCP endpoint, not a WME Group product MCP server.
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/endeavor.png
+    humanURL: https://wmegrp.com/wp-json/mcp
+    baseURL: https://wmegrp.com/wp-json/mcp/mcp-adapter-default-server
+    tags:
+      - MCP
+      - Agents
+    properties:
+      - type: MCPServer
+        url: mcp/endeavor-mcp.yml
+      - type: ToolCrosswalk
+        url: mcp/endeavor-tool-crosswalk.yml
 common:
+  - type: Authentication
+    url: authentication/endeavor-authentication.yml
   - type: DomainSecurity
     url: security/endeavor-domain-security.yml
+  - type: Conventions
+    url: conventions/endeavor-conventions.yml
+  - type: Conformance
+    url: conformance/endeavor-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/endeavor-lifecycle.yml
+  - type: Plans
+    url: plans/endeavor-plans-pricing.yml
+  - type: LLMsTxt
+    url: llms/endeavor-llms.txt
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: PrivacyPolicy
+    url: https://wmegrp.com/privacy-policy/
+  - type: TermsOfService
+    url: https://wmegrp.com/terms-of-use/
+  - type: Careers
+    url: https://wmeimg.wd1.myworkdayjobs.com/WMEGRP
   - type: LinkedIn
     url: https://www.linkedin.com/company/endeavor-co
   - type: Website
@@ -61,3 +134,8 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-09-06'
+  status: enriched
+  artifacts_added: 15
+  pass: local-v3

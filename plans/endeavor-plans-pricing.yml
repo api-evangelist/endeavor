@@ -1,0 +1,26 @@
+generated: '2026-09-06'
+method: searched
+source: https://wmegrp.com/
+plan_count: 0
+plans: []
+note: >-
+  An honest zero, and not a "contact sales" gate either. Endeavor / WME Group sells talent
+  representation, marketing services, brand licensing and non-scripted content production — not API
+  access. The corporate site publishes no pricing page, no plans page, no sign-up and no developer
+  program of any kind; the whole site is four pages plus a press-release archive. The only
+  machine-readable surface on the domain is the corporate site's own WordPress content API, which is
+  free, unmetered, unkeyed and unadvertised.
+evidence:
+- url: https://wmegrp.com/
+  status: 200
+  finding: >-
+    Homepage nav is About / Businesses / Careers / Content. No pricing, plans, products, sign-up or
+    developer link.
+- url: https://wmegrp.com/page-sitemap.xml
+  status: 200
+  finding: >-
+    Four pages total — home, recruiting policies, global impact & inclusion, environmental
+    compliance. No commercial or developer page exists to price.
+- url: https://wmegrp.com/wp-json/wp/v2/posts?per_page=1
+  status: 200
+  finding: Content API answers anonymously with no key and no plan.

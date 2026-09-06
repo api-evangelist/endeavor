@@ -1,0 +1,126 @@
+generated: '2026-09-06'
+method: probed
+source: >-
+  Live anonymous probes of https://wmegrp.com/wp-json/wp/v2/* on 2026-09-06, plus the response
+  envelope declared in openapi/endeavor-content-api-openapi.yml. Endeavor / WME Group publishes no
+  error reference; every code below was OBSERVED in a real response body, not copied from docs.
+format: wordpress-rest
+rfc9457: false
+content_type: application/json
+envelope:
+  shape: '{"code": "<slug>", "message": "<human text>", "data": {"status": <http status>}}'
+  fields:
+  - name: code
+    description: Machine-readable error slug. This is the field an agent should branch on.
+  - name: message
+    description: Human-readable English message. Not stable; not a contract.
+  - name: data.status
+    description: The HTTP status code, repeated inside the body.
+  missing:
+  - type (no problem-type URI)
+  - instance
+  - documentation URL
+  - retry hint
+problem_types:
+- code: rest_forbidden
+  status: 401
+  title: Not allowed
+  observed_at:
+  - https://wmegrp.com/wp-json/wp/v2/settings
+  - https://wmegrp.com/wp-json/wp-abilities/v1/abilities
+  - https://wmegrp.com/wp-json/mcp/mcp-adapter-default-server
+  remediation: >-
+    Authenticate as a WordPress user holding the required capability. Credentials are not issued to
+    the public; there is no self-service key.
+- code: rest_no_route
+  status: 404
+  title: No route matched the URL and request method
+  observed_at:
+  - https://wmegrp.com/wp-json/wp/v2/nope
+  remediation: Re-read the route index at https://wmegrp.com/wp-json/ and correct the path or method.
+- code: rest_user_cannot_view
+  status: 401
+  title: Not allowed to list users
+  observed_at:
+  - https://wmegrp.com/wp-json/wp/v2/users
+  remediation: Author identities are not exposed anonymously on this site.
+- code: rest_comment_disabled
+  status: 403
+  title: Comments are disabled
+  observed_at:
+  - https://wmegrp.com/wp-json/wp/v2/comments
+  remediation: >-
+    Not an auth failure — the collection is switched off site-wide. Do not retry with credentials.
+- code: rest_block_type_cannot_view
+  status: 401
+  title: Not allowed to manage block types
+  observed_at:
+  - https://wmegrp.com/wp-json/wp/v2/block-types
+- code: rest_cannot_read
+  status: 401
+  title: Not allowed to read the resource
+  observed_at:
+  - https://wmegrp.com/wp-json/wp/v2/font-collections
+  - https://wmegrp.com/wp-json/wp/v2/font-families
+- code: rest_cannot_view
+  status: 401
+  title: Not allowed to view the resource
+  observed_at:
+  - https://wmegrp.com/wp-json/wp/v2/menus
+  - https://wmegrp.com/wp-json/wp/v2/menu-items
+  - https://wmegrp.com/wp-json/wp/v2/menu-locations
+  - https://wmegrp.com/wp-json/wp/v2/icons
+  - https://wmegrp.com/wp-json/wp/v2/icon-collections
+- code: rest_cannot_view_plugins
+  status: 401
+  title: Not allowed to manage plugins
+  observed_at:
+  - https://wmegrp.com/wp-json/wp/v2/plugins
+- code: rest_cannot_view_themes
+  status: 401
+  title: Not allowed to view themes
+  observed_at:
+  - https://wmegrp.com/wp-json/wp/v2/themes
+- code: rest_cannot_manage_widgets
+  status: 401
+  title: Not allowed to manage widgets
+  observed_at:
+  - https://wmegrp.com/wp-json/wp/v2/widgets
+  - https://wmegrp.com/wp-json/wp/v2/widget-types
+  - https://wmegrp.com/wp-json/wp/v2/sidebars
+- code: rest_cannot_manage_templates
+  status: 401
+  title: Not allowed to access templates
+  observed_at:
+  - https://wmegrp.com/wp-json/wp/v2/templates
+  - https://wmegrp.com/wp-json/wp/v2/template-parts
+- code: rest_missing_callback_param
+  status: 400
+  title: Missing required parameter(s)
+  observed_at:
+  - https://wmegrp.com/wp-json/wp/v2/view-config
+  remediation: The body names the missing parameters in data.params; supply them and retry.
+- code: rest_invalid_param
+  status: 400
+  title: A parameter failed validation
+  observed_at: []
+  note: >-
+    Declared on every operation in the derived OpenAPI as WordPress core's standard validation
+    failure. Not individually reproduced against this host; listed as declared, not observed.
+agent_guidance:
+  retryable:
+  - rest_missing_callback_param
+  - rest_invalid_param
+  not_retryable_without_credentials:
+  - rest_forbidden
+  - rest_user_cannot_view
+  - rest_cannot_read
+  - rest_cannot_view
+  - rest_cannot_view_plugins
+  - rest_cannot_view_themes
+  - rest_cannot_manage_widgets
+  - rest_cannot_manage_templates
+  - rest_block_type_cannot_view
+  never_retry:
+  - rest_comment_disabled
+  - rest_no_route

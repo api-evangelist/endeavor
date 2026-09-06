@@ -1,0 +1,56 @@
+generated: '2026-09-06'
+method: searched
+source: >-
+  Searched wmegrp.com (four pages plus a press-release archive), DNS for a status host, and the
+  derived contract for deprecation markers, on 2026-09-06.
+versioning:
+  policy_published: false
+  scheme: namespace-in-path (wp/v2)
+  note: >-
+    The version string is WordPress core's namespace convention, inherited from the CMS. Endeavor /
+    WME Group has published no versioning policy, no version-support window and no migration guide.
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+  note: >-
+    No RFC 8594 Sunset or Deprecation header was returned on any observed response, and no operation
+    in the derived contract is marked deprecated. There is no deprecation policy to point at, so no
+    Deprecation pointer is emitted in apis.yml.
+status_page:
+  published: false
+  probed:
+  - host: status.wmegrp.com
+    result: NXDOMAIN
+  - host: status.wme.com
+    result: NXDOMAIN
+  note: >-
+    No status page, no uptime history, no incident feed. No StatusPage pointer is emitted.
+sla:
+  published: false
+changelog:
+  api_changelog: false
+  note: >-
+    There is no API changelog. The company does publish a dated corporate press-release archive at
+    https://wmegrp.com/ (six posts, readable as JSON at
+    https://wmegrp.com/wp-json/wp/v2/posts), but it is corporate news, not API change history, and
+    is not registered as a ChangeLog.
+corporate_lifecycle:
+  note: >-
+    The company itself has moved, and that is the material lifecycle fact in this record. Endeavor
+    Group Holdings was taken private by Silver Lake on 2025-03-24 and the continuing talent, marketing,
+    licensing and content businesses were rebranded WME Group in 2026. UFC, WWE, IMG, On Location and
+    PBR sit under TKO Group Holdings. endeavorco.com and www.endeavorco.com now 301 to
+    https://wmegrp.com/; endeavorgroupholdings.com 301s to https://img.com/ (a TKO property).
+  redirects:
+  - from: https://endeavorco.com/
+    to: https://wmegrp.com/
+    status: 301
+  - from: https://www.endeavorco.com/
+    to: https://wmegrp.com/
+    status: 301
+  - from: https://endeavorgroupholdings.com/
+    to: https://img.com/
+    status: 301

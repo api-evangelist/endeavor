@@ -1,0 +1,64 @@
+generated: '2026-09-06'
+method: derived
+source: mcp/endeavor-mcp.yml + openapi/endeavor-content-api-openapi.yml
+status: gated
+status_raw: unmappable-gated
+note: >-
+  Endeavor / WME Group serves both an MCP endpoint and (via the WordPress REST route index) a REST
+  content surface on wmegrp.com, so the crosswalk is emitted — but the MCP tools/list and the backing
+  wp-abilities registry both return HTTP 401 rest_forbidden, and the company publishes no llms.txt or
+  tool documentation, so NO tool name is publicly observable. The crosswalk therefore records ZERO
+  mapped rows rather than guessing at WordPress MCP Adapter defaults. rest_only[] below is the real,
+  complete public REST surface that currently has no observable agent tool bound to it.
+surfaces:
+  openapi:
+    file: openapi/endeavor-content-api-openapi.yml
+    base_url: https://wmegrp.com/wp-json/wp/v2
+    gated: false
+    note: >-
+      Anonymous read on every collection listed below; write operations require Application Password
+      auth. Derived by API Evangelist from https://wmegrp.com/wp-json/ — not published by the company.
+  mcp:
+    url: https://wmegrp.com/wp-json/mcp/mcp-adapter-default-server
+    gated: true
+    note: 'tools/list -> HTTP 401 rest_forbidden'
+  graphql:
+    present: false
+    note: no /graphql route in any of the 15 registered WordPress REST namespaces
+crosswalk: []
+mcp_only: []
+rest_only:
+- capability: Corporate announcements and press releases (6 published)
+  operations: [getPosts, getPostsById]
+- capability: Corporate pages — home, recruiting policies, social impact, environmental compliance (11 published)
+  operations: [getPages, getPagesById]
+- capability: Media library (177 attachments)
+  operations: [getMedia, getMediaById]
+- capability: Site search across every registered type
+  operations: [getSearch]
+- capability: Core taxonomy (1 category, 0 tags)
+  operations: [getCategories, getCategoriesById, getTags, getTagsById]
+- capability: 'Businesses directory — custom post types `businesses` and `businesses_cities`, both registered but currently empty (0 published)'
+  operations: [getBusinesses, getBusinessesById, getBusinessesCities, getBusinessesCitiesById]
+- capability: Site navigation menus exposed as content (4 published)
+  operations: [getNavigation, getNavigationById]
+- capability: Discovery — content types, taxonomies and post statuses
+  operations: [getTypes, getTypesByType, getTaxonomies, getTaxonomiesByTaxonomy, getStatuses, getStatusesByStatus]
+gated_rest:
+  note: >-
+    These REST collections exist in the route index but return HTTP 401/403 anonymously, so they are
+    neither agent-reachable nor publicly bindable.
+  collections:
+  - {path: /wp/v2/users, status: 401, code: rest_user_cannot_view}
+  - {path: /wp/v2/settings, status: 401, code: rest_forbidden}
+  - {path: /wp/v2/themes, status: 401, code: rest_cannot_view_themes}
+  - {path: /wp/v2/plugins, status: 401, code: rest_cannot_view_plugins}
+  - {path: /wp/v2/menus, status: 401, code: rest_cannot_view}
+  - {path: /wp/v2/widgets, status: 401, code: rest_cannot_manage_widgets}
+  - {path: /wp/v2/templates, status: 401, code: rest_cannot_manage_templates}
+  - {path: /wp/v2/comments, status: 403, code: rest_comment_disabled}
+coverage:
+  tools_named: 0
+  tools_bound: 0
+  mcp_only: 0
+  rest_only: 8

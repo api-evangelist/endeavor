@@ -1,0 +1,74 @@
+generated: '2026-09-06'
+method: derived
+source: >-
+  Derived from openapi/endeavor-content-api-openapi.yml and live probes of wmegrp.com on 2026-09-06.
+  Endeavor / WME Group publishes no compliance or standards claims for an API, because it publishes
+  no API. Every `conforms: false` below is a measured absence, not a judgement.
+conformance:
+- id: oauth2
+  conforms: false
+  evidence: >-
+    No oauth2 securityScheme on any route; https://wmegrp.com/.well-known/oauth-authorization-server
+    returned HTTP 404 and https://wmegrp.com/.well-known/openid-configuration returned HTTP 404.
+- id: oidc
+  conforms: false
+  evidence: https://wmegrp.com/.well-known/openid-configuration -> HTTP 404
+- id: rfc9457
+  conforms: false
+  evidence: >-
+    Errors are served as application/json in WordPress's own {code,message,data.status} envelope, not
+    application/problem+json. Observed at https://wmegrp.com/wp-json/wp/v2/nope (HTTP 404).
+- id: idempotency
+  conforms: false
+  evidence: >-
+    No Idempotency-Key header and no replay-protection mechanism on any of the 256 operations in the
+    derived contract. See conventions/endeavor-conventions.yml idempotency.coverage = none.
+- id: pagination
+  conforms: true
+  evidence: >-
+    Page-number pagination with page/per_page/offset parameters and X-WP-Total / X-WP-TotalPages /
+    RFC 8288 Link rel=next headers, observed on
+    https://wmegrp.com/wp-json/wp/v2/posts?per_page=1 (HTTP 200) on 2026-09-06.
+- id: rfc8288-web-linking
+  conforms: true
+  evidence: >-
+    Link: <https://wmegrp.com/wp-json/wp/v2/posts?per_page=1&page=2>; rel="next" returned on the
+    posts collection. WordPress also emits _links HAL-style link objects in every response body.
+- id: mcp
+  conforms: partial
+  evidence: >-
+    A Model Context Protocol endpoint is registered and live at
+    https://wmegrp.com/wp-json/mcp/mcp-adapter-default-server (WordPress MCP Adapter), and the
+    namespace index at https://wmegrp.com/wp-json/mcp returns HTTP 200. Protocol conformance could
+    not be verified because an anonymous tools/list returns HTTP 401 rest_forbidden. Recorded as
+    partial: the surface is provably present, the protocol behaviour is not observable.
+- id: a2a
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json returned HTTP 404 on wmegrp.com,
+    www.wme.com, www.wmeagency.com, imglicensing.com, www.160over90.com and www.pantheonmedia.com.
+- id: openapi
+  conforms: false
+  evidence: >-
+    The company publishes no OpenAPI. The OpenAPI in this repository is derived by API Evangelist
+    from the WordPress route index and is stamped x-provider-published: false.
+- id: security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returned HTTP 404 on every WME Group host probed.
+domain_standard:
+  applicable: false
+  note: >-
+    REWARD-ONLY and correctly empty. Endeavor / WME Group is a talent-representation, marketing,
+    licensing and content holding company; its markets (talent agency, brand licensing, non-scripted
+    production) have no machine-readable interchange standard of the kind this check looks for, and
+    the only contract on the wire is a general-purpose CMS content API. No domain standard is
+    invented to fill the slot.
+compliance_program:
+  published: false
+  evidence: >-
+    No trust center, no SOC 2 / ISO 27001 / PCI / HIPAA / FedRAMP claim, and no security page was
+    found on wmegrp.com. probe-security-programs.py returned vdp=none trust=none on 2026-09-06.
+  note: >-
+    The only compliance-adjacent pages the corporate site publishes are a privacy policy, a cookie
+    policy, terms of use, a UK tax strategy and an environmental-compliance page — corporate
+    governance documents, not an API compliance program. No Compliance pointer is emitted.
