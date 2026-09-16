@@ -56,50 +56,586 @@ created: '2026-03-21'
 modified: '2026-09-06'
 specificationVersion: '0.23'
 apis:
-  - aid: endeavor:content-api
-    name: WME Group Content API (WordPress REST wp/v2)
-    description: >-
-      The corporate site of WME Group — the renamed Endeavor Group Holdings — runs WordPress and
-      exposes the WordPress REST API at https://wmegrp.com/wp-json/. The wp/v2 namespace is
-      anonymously readable and returns the company's press releases, corporate pages, media library,
-      taxonomies and a site-wide search endpoint as JSON. This is the CMS's content API, NOT a
-      product API: Endeavor / WME Group publishes no developer program, no documentation and no
-      OpenAPI. The OpenAPI in this repository was derived mechanically by API Evangelist from the
-      route-discovery document and is stamped x-provider-published: false.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/endeavor.png
-    humanURL: https://wmegrp.com/
-    baseURL: https://wmegrp.com/wp-json/wp/v2
-    tags:
-      - Content
-      - CMS
-      - Press Releases
-    properties:
-      - type: OpenAPI
-        url: openapi/endeavor-content-api-openapi.yml
-      - type: ErrorCatalog
-        url: errors/endeavor-problem-types.yml
-      - type: RateLimits
-        url: rate-limits/endeavor-rate-limits.yml
-  - aid: endeavor:mcp
-    name: WME Group MCP Server (WordPress MCP Adapter)
-    description: >-
-      A Model Context Protocol server endpoint advertised in the wmegrp.com WordPress REST route
-      index under the "mcp" namespace and served at /wp-json/mcp/mcp-adapter-default-server. The
-      namespace index answers HTTP 200 and the endpoint is live, but it is authentication-gated: an
-      anonymous JSON-RPC tools/list returns HTTP 401 rest_forbidden, as does the companion
-      wp-abilities/v1 registry, so the published tool set could not be enumerated. This is the
-      corporate site CMS's MCP endpoint, not a WME Group product MCP server.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/endeavor.png
-    humanURL: https://wmegrp.com/wp-json/mcp
-    baseURL: https://wmegrp.com/wp-json/mcp/mcp-adapter-default-server
-    tags:
-      - MCP
-      - Agents
-    properties:
-      - type: MCPServer
-        url: mcp/endeavor-mcp.yml
-      - type: ToolCrosswalk
-        url: mcp/endeavor-tool-crosswalk.yml
+- aid: endeavor:mcp
+  name: WME Group MCP Server (WordPress MCP Adapter)
+  description: >-
+    A Model Context Protocol server endpoint advertised in the wmegrp.com WordPress REST route index under
+    the "mcp" namespace and served at /wp-json/mcp/mcp-adapter-default-server. The namespace index answers
+    HTTP 200 and the endpoint is live, but it is authentication-gated: an anonymous JSON-RPC tools/list
+    returns HTTP 401 rest_forbidden, as does the companion wp-abilities/v1 registry, so the published
+    tool set could not be enumerated. This is the corporate site CMS's MCP endpoint, not a WME Group product
+    MCP server.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/endeavor.png
+  humanURL: https://wmegrp.com/wp-json/mcp
+  baseURL: https://wmegrp.com/wp-json/mcp/mcp-adapter-default-server
+  tags:
+  - MCP
+  - Agents
+  properties:
+  - type: MCPServer
+    url: mcp/endeavor-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/endeavor-tool-crosswalk.yml
+- aid: endeavor:endeavor-blockdirectory-api
+  name: Endeavor Block Directory API
+  description: The BlockDirectory API from Endeavor — 1 operation(s) for blockdirectory.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - BlockDirectory
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-blockdirectory-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-blockpatterns-api
+  name: Endeavor Block Patterns API
+  description: The BlockPatterns API from Endeavor — 2 operation(s) for blockpatterns.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - BlockPatterns
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-blockpatterns-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-blockrenderer-api
+  name: Endeavor Block Renderer API
+  description: The BlockRenderer API from Endeavor — 1 operation(s) for blockrenderer.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - BlockRenderer
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-blockrenderer-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-blocks-api
+  name: Endeavor Blocks API
+  description: The Blocks API from Endeavor — 6 operation(s) for blocks.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Blocks
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-blocks-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-blocktypes-api
+  name: Endeavor Block Types API
+  description: The BlockTypes API from Endeavor — 3 operation(s) for blocktypes.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - BlockTypes
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-blocktypes-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-businesses-api
+  name: Endeavor Businesses API
+  description: The Businesses API from Endeavor — 2 operation(s) for businesses.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Businesses
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-businesses-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-businessescities-api
+  name: Endeavor Businesses Cities API
+  description: The BusinessesCities API from Endeavor — 2 operation(s) for businessescities.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - BusinessesCities
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-businessescities-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-categories-api
+  name: Endeavor Categories API
+  description: The Categories API from Endeavor — 2 operation(s) for categories.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-categories-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-comments-api
+  name: Endeavor Comments API
+  description: The Comments API from Endeavor — 2 operation(s) for comments.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Comments
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-comments-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-fontcollections-api
+  name: Endeavor Font Collections API
+  description: The FontCollections API from Endeavor — 2 operation(s) for fontcollections.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - FontCollections
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-fontcollections-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-fontfamilies-api
+  name: Endeavor Font Families API
+  description: The FontFamilies API from Endeavor — 4 operation(s) for fontfamilies.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - FontFamilies
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-fontfamilies-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-globalstyles-api
+  name: Endeavor Global Styles API
+  description: The GlobalStyles API from Endeavor — 5 operation(s) for globalstyles.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - GlobalStyles
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-globalstyles-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-iconcollections-api
+  name: Endeavor Icon Collections API
+  description: The IconCollections API from Endeavor — 2 operation(s) for iconcollections.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - IconCollections
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-iconcollections-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-icons-api
+  name: Endeavor Icons API
+  description: The Icons API from Endeavor — 3 operation(s) for icons.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Icons
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-icons-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-media-api
+  name: Endeavor Media API
+  description: The Media API from Endeavor — 6 operation(s) for media.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Media
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-media-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-menuitems-api
+  name: Endeavor Menu Items API
+  description: The MenuItems API from Endeavor — 4 operation(s) for menuitems.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - MenuItems
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-menuitems-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-menulocations-api
+  name: Endeavor Menu Locations API
+  description: The MenuLocations API from Endeavor — 2 operation(s) for menulocations.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - MenuLocations
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-menulocations-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-menus-api
+  name: Endeavor Menus API
+  description: The Menus API from Endeavor — 2 operation(s) for menus.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Menus
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-menus-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-navigation-api
+  name: Endeavor Navigation API
+  description: The Navigation API from Endeavor — 6 operation(s) for navigation.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Navigation
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-navigation-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-pages-api
+  name: Endeavor Pages API
+  description: The Pages API from Endeavor — 6 operation(s) for pages.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Pages
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-pages-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-patterndirectory-api
+  name: Endeavor Pattern Directory API
+  description: The PatternDirectory API from Endeavor — 1 operation(s) for patterndirectory.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - PatternDirectory
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-patterndirectory-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-plugins-api
+  name: Endeavor Plugins API
+  description: The Plugins API from Endeavor — 2 operation(s) for plugins.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Plugins
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-plugins-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-posts-api
+  name: Endeavor Posts API
+  description: The Posts API from Endeavor — 6 operation(s) for posts.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Posts
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-posts-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-rmcontenteditor-api
+  name: Endeavor Rm Content Editor API
+  description: The RmContentEditor API from Endeavor — 4 operation(s) for rmcontenteditor.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - RmContentEditor
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-rmcontenteditor-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-root-api
+  name: Endeavor Root API
+  description: The Root API from Endeavor — 1 operation(s) for root.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Root
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-root-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-search-api
+  name: Endeavor Search API
+  description: The Search API from Endeavor — 1 operation(s) for search.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-search-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-settings-api
+  name: Endeavor Settings API
+  description: The Settings API from Endeavor — 1 operation(s) for settings.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-settings-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-sidebars-api
+  name: Endeavor Sidebars API
+  description: The Sidebars API from Endeavor — 2 operation(s) for sidebars.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Sidebars
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-sidebars-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-statuses-api
+  name: Endeavor Statuses API
+  description: The Statuses API from Endeavor — 2 operation(s) for statuses.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Statuses
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-statuses-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-tags-api
+  name: Endeavor Tags API
+  description: The Tags API from Endeavor — 2 operation(s) for tags.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-tags-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-taxonomies-api
+  name: Endeavor Taxonomies API
+  description: The Taxonomies API from Endeavor — 2 operation(s) for taxonomies.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Taxonomies
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-taxonomies-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-templateparts-api
+  name: Endeavor Template Parts API
+  description: The TemplateParts API from Endeavor — 7 operation(s) for templateparts.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - TemplateParts
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-templateparts-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-templates-api
+  name: Endeavor Templates API
+  description: The Templates API from Endeavor — 7 operation(s) for templates.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-templates-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-themes-api
+  name: Endeavor Themes API
+  description: The Themes API from Endeavor — 2 operation(s) for themes.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Themes
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-themes-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-types-api
+  name: Endeavor Types API
+  description: The Types API from Endeavor — 2 operation(s) for types.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Types
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-types-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-users-api
+  name: Endeavor Users API
+  description: The Users API from Endeavor — 6 operation(s) for users.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-users-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-viewconfig-api
+  name: Endeavor View Config API
+  description: The ViewConfig API from Endeavor — 1 operation(s) for viewconfig.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - ViewConfig
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-viewconfig-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-widgets-api
+  name: Endeavor Widgets API
+  description: The Widgets API from Endeavor — 2 operation(s) for widgets.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - Widgets
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-widgets-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-widgettypes-api
+  name: Endeavor Widget Types API
+  description: The WidgetTypes API from Endeavor — 4 operation(s) for widgettypes.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - WidgetTypes
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-widgettypes-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
+- aid: endeavor:endeavor-wppatterncategory-api
+  name: Endeavor Wp Pattern Category API
+  description: The WpPatternCategory API from Endeavor — 2 operation(s) for wppatterncategory.
+  humanURL: https://wmegrp.com/
+  baseURL: https://wmegrp.com/wp-json/wp/v2
+  tags:
+  - WpPatternCategory
+  properties:
+  - type: OpenAPI
+    url: openapi/endeavor-wppatterncategory-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/endeavor-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/endeavor-rate-limits.yml
 common:
   - type: Twitter
     url: https://x.com/Endeavor
