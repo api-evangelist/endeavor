@@ -1,0 +1,410 @@
+openapi: 3.2.0
+info:
+  title: WME Group Content API (WordPress REST wp/v2) Settings API
+  version: wp/v2
+  summary: Public read surface of wmegrp.com — the corporate site of WME Group, the company formerly named Endeavor Group Holdings.
+  description: WME Group (the renamed Endeavor Group Holdings) publishes wmegrp.com on WordPress, which exposes the WordPress REST API at https://wmegrp.com/wp-json/.
+  contact:
+    name: WME Group
+    url: https://wmegrp.com/
+    email: inquiries@wmegrp.com
+  x-derived-by: API Evangelist enrichment pipeline
+  x-derived-from: https://wmegrp.com/wp-json/
+  x-derived-on: '2026-09-06'
+  x-provider-published: false
+servers:
+- url: https://wmegrp.com/wp-json
+  description: Production
+tags:
+- name: Settings
+paths:
+  /wp/v2/settings:
+    get:
+      operationId: getSettings
+      summary: GET /wp/v2/settings
+      tags:
+      - Settings
+      responses:
+        '200':
+          description: Success. JSON payload as returned by the WordPress REST API.
+          content:
+            application/json:
+              schema:
+                type:
+                - object
+                - array
+        '400':
+          description: rest_invalid_param — a parameter failed validation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPRestError'
+        '401':
+          description: rest_forbidden — authentication required or insufficient capability.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPRestError'
+        '404':
+          description: rest_no_route / rest_post_invalid_id — no matching route or object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPRestError'
+      description: Read operation. Observed anonymously readable on wmegrp.com for the public content collections.
+    post:
+      operationId: createSettings
+      summary: POST /wp/v2/settings
+      tags:
+      - Settings
+      responses:
+        '200':
+          description: Success. JSON payload as returned by the WordPress REST API.
+          content:
+            application/json:
+              schema:
+                type:
+                - object
+                - array
+        '400':
+          description: rest_invalid_param — a parameter failed validation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPRestError'
+        '401':
+          description: rest_forbidden — authentication required or insufficient capability.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPRestError'
+        '404':
+          description: rest_no_route / rest_post_invalid_id — no matching route or object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPRestError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date_format:
+                  type: string
+                  description: A date format for all date strings.
+                default_category:
+                  type: integer
+                  description: Default post category.
+                default_comment_status:
+                  type: string
+                  enum:
+                  - open
+                  - closed
+                  description: Allow people to submit comments on new posts.
+                default_ping_status:
+                  type: string
+                  enum:
+                  - open
+                  - closed
+                  description: Allow link notifications from other blogs (pingbacks and trackbacks) on new articles.
+                default_post_format:
+                  type: string
+                  description: Default post format.
+                description:
+                  type: string
+                  description: Site tagline.
+                email:
+                  type: string
+                  format: email
+                  description: This address is used for admin purposes, like new user notification.
+                language:
+                  type: string
+                  description: WordPress locale code.
+                page_for_posts:
+                  type: integer
+                  description: The ID of the page that should display the latest posts
+                page_on_front:
+                  type: integer
+                  description: The ID of the page that should be displayed on the front page
+                posts_per_page:
+                  type: integer
+                  description: Blog pages show at most.
+                show_on_front:
+                  type: string
+                  description: What to show on the front page
+                site_icon:
+                  type: integer
+                  description: Site icon.
+                site_logo:
+                  type: integer
+                  description: Site logo.
+                start_of_week:
+                  type: integer
+                  description: A day number of the week that the week should start on.
+                time_format:
+                  type: string
+                  description: A time format for all time strings.
+                timezone:
+                  type: string
+                  description: A city in the same timezone as you.
+                title:
+                  type: string
+                  description: Site title.
+                url:
+                  type: string
+                  format: uri
+                  description: Site URL.
+                use_smilies:
+                  type: boolean
+                  description: Convert emoticons like :-) and :-P to graphics on display.
+      security:
+      - applicationPassword: []
+      description: Write operation. Requires an authenticated WordPress user with the capability the route enforces; anonymous callers receive HTTP 401 rest_forbidden.
+    put:
+      operationId: updateSettings
+      summary: PUT /wp/v2/settings
+      tags:
+      - Settings
+      responses:
+        '200':
+          description: Success. JSON payload as returned by the WordPress REST API.
+          content:
+            application/json:
+              schema:
+                type:
+                - object
+                - array
+        '400':
+          description: rest_invalid_param — a parameter failed validation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPRestError'
+        '401':
+          description: rest_forbidden — authentication required or insufficient capability.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPRestError'
+        '404':
+          description: rest_no_route / rest_post_invalid_id — no matching route or object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPRestError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date_format:
+                  type: string
+                  description: A date format for all date strings.
+                default_category:
+                  type: integer
+                  description: Default post category.
+                default_comment_status:
+                  type: string
+                  enum:
+                  - open
+                  - closed
+                  description: Allow people to submit comments on new posts.
+                default_ping_status:
+                  type: string
+                  enum:
+                  - open
+                  - closed
+                  description: Allow link notifications from other blogs (pingbacks and trackbacks) on new articles.
+                default_post_format:
+                  type: string
+                  description: Default post format.
+                description:
+                  type: string
+                  description: Site tagline.
+                email:
+                  type: string
+                  format: email
+                  description: This address is used for admin purposes, like new user notification.
+                language:
+                  type: string
+                  description: WordPress locale code.
+                page_for_posts:
+                  type: integer
+                  description: The ID of the page that should display the latest posts
+                page_on_front:
+                  type: integer
+                  description: The ID of the page that should be displayed on the front page
+                posts_per_page:
+                  type: integer
+                  description: Blog pages show at most.
+                show_on_front:
+                  type: string
+                  description: What to show on the front page
+                site_icon:
+                  type: integer
+                  description: Site icon.
+                site_logo:
+                  type: integer
+                  description: Site logo.
+                start_of_week:
+                  type: integer
+                  description: A day number of the week that the week should start on.
+                time_format:
+                  type: string
+                  description: A time format for all time strings.
+                timezone:
+                  type: string
+                  description: A city in the same timezone as you.
+                title:
+                  type: string
+                  description: Site title.
+                url:
+                  type: string
+                  format: uri
+                  description: Site URL.
+                use_smilies:
+                  type: boolean
+                  description: Convert emoticons like :-) and :-P to graphics on display.
+      security:
+      - applicationPassword: []
+      description: Write operation. Requires an authenticated WordPress user with the capability the route enforces; anonymous callers receive HTTP 401 rest_forbidden.
+    patch:
+      operationId: updateSettings2
+      summary: PATCH /wp/v2/settings
+      tags:
+      - Settings
+      responses:
+        '200':
+          description: Success. JSON payload as returned by the WordPress REST API.
+          content:
+            application/json:
+              schema:
+                type:
+                - object
+                - array
+        '400':
+          description: rest_invalid_param — a parameter failed validation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPRestError'
+        '401':
+          description: rest_forbidden — authentication required or insufficient capability.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPRestError'
+        '404':
+          description: rest_no_route / rest_post_invalid_id — no matching route or object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPRestError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date_format:
+                  type: string
+                  description: A date format for all date strings.
+                default_category:
+                  type: integer
+                  description: Default post category.
+                default_comment_status:
+                  type: string
+                  enum:
+                  - open
+                  - closed
+                  description: Allow people to submit comments on new posts.
+                default_ping_status:
+                  type: string
+                  enum:
+                  - open
+                  - closed
+                  description: Allow link notifications from other blogs (pingbacks and trackbacks) on new articles.
+                default_post_format:
+                  type: string
+                  description: Default post format.
+                description:
+                  type: string
+                  description: Site tagline.
+                email:
+                  type: string
+                  format: email
+                  description: This address is used for admin purposes, like new user notification.
+                language:
+                  type: string
+                  description: WordPress locale code.
+                page_for_posts:
+                  type: integer
+                  description: The ID of the page that should display the latest posts
+                page_on_front:
+                  type: integer
+                  description: The ID of the page that should be displayed on the front page
+                posts_per_page:
+                  type: integer
+                  description: Blog pages show at most.
+                show_on_front:
+                  type: string
+                  description: What to show on the front page
+                site_icon:
+                  type: integer
+                  description: Site icon.
+                site_logo:
+                  type: integer
+                  description: Site logo.
+                start_of_week:
+                  type: integer
+                  description: A day number of the week that the week should start on.
+                time_format:
+                  type: string
+                  description: A time format for all time strings.
+                timezone:
+                  type: string
+                  description: A city in the same timezone as you.
+                title:
+                  type: string
+                  description: Site title.
+                url:
+                  type: string
+                  format: uri
+                  description: Site URL.
+                use_smilies:
+                  type: boolean
+                  description: Convert emoticons like :-) and :-P to graphics on display.
+      security:
+      - applicationPassword: []
+      description: Write operation. Requires an authenticated WordPress user with the capability the route enforces; anonymous callers receive HTTP 401 rest_forbidden.
+components:
+  schemas:
+    WPRestError:
+      type: object
+      description: The WordPress REST API error envelope. Not RFC 9457 problem+json.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error slug, e.g. rest_forbidden, rest_no_route, rest_invalid_param.
+        message:
+          type: string
+          description: Human-readable message.
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: HTTP status code, repeated in the body.
+      required:
+      - code
+      - message
+  securitySchemes:
+    applicationPassword:
+      type: http
+      scheme: basic
+      description: WordPress Application Passwords over HTTP Basic. Issued from /wp-admin/authorize-application.php by an authenticated site user; not available to the public.

@@ -1,3 +1,5 @@
+# x-archived-from: endeavor-content-api-openapi.yml
+# x-archived-on: 2026-09-16
 # DERIVED by the API Evangelist enrichment pipeline from https://wmegrp.com/wp-json/ (2026-09-06).
 # WME Group / Endeavor does not publish an OpenAPI. Nothing here is invented: every path,
 # method and parameter is transcribed from the WordPress REST route-discovery document.

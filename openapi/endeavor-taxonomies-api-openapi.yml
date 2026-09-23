@@ -1,0 +1,150 @@
+openapi: 3.2.0
+info:
+  title: WME Group Content API (WordPress REST wp/v2) Taxonomies API
+  version: wp/v2
+  summary: Public read surface of wmegrp.com — the corporate site of WME Group, the company formerly named Endeavor Group Holdings.
+  description: WME Group (the renamed Endeavor Group Holdings) publishes wmegrp.com on WordPress, which exposes the WordPress REST API at https://wmegrp.com/wp-json/.
+  contact:
+    name: WME Group
+    url: https://wmegrp.com/
+    email: inquiries@wmegrp.com
+  x-derived-by: API Evangelist enrichment pipeline
+  x-derived-from: https://wmegrp.com/wp-json/
+  x-derived-on: '2026-09-06'
+  x-provider-published: false
+servers:
+- url: https://wmegrp.com/wp-json
+  description: Production
+tags:
+- name: Taxonomies
+paths:
+  /wp/v2/taxonomies:
+    get:
+      operationId: getTaxonomies
+      summary: GET /wp/v2/taxonomies
+      tags:
+      - Taxonomies
+      responses:
+        '200':
+          description: Success. JSON payload as returned by the WordPress REST API.
+          content:
+            application/json:
+              schema:
+                type:
+                - object
+                - array
+        '400':
+          description: rest_invalid_param — a parameter failed validation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPRestError'
+        '401':
+          description: rest_forbidden — authentication required or insufficient capability.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPRestError'
+        '404':
+          description: rest_no_route / rest_post_invalid_id — no matching route or object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPRestError'
+      parameters:
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+        description: Scope under which the request is made; determines fields present in response.
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Limit results to taxonomies associated with a specific post type.
+      description: Read operation. Observed anonymously readable on wmegrp.com for the public content collections.
+  /wp/v2/taxonomies/{taxonomy}:
+    get:
+      operationId: getTaxonomiesByTaxonomy
+      summary: GET /wp/v2/taxonomies/{taxonomy}
+      tags:
+      - Taxonomies
+      responses:
+        '200':
+          description: Success. JSON payload as returned by the WordPress REST API.
+          content:
+            application/json:
+              schema:
+                type:
+                - object
+                - array
+        '400':
+          description: rest_invalid_param — a parameter failed validation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPRestError'
+        '401':
+          description: rest_forbidden — authentication required or insufficient capability.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPRestError'
+        '404':
+          description: rest_no_route / rest_post_invalid_id — no matching route or object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPRestError'
+      parameters:
+      - name: taxonomy
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Path segment from the WordPress route pattern.
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+        description: Scope under which the request is made; determines fields present in response.
+      description: Read operation. Observed anonymously readable on wmegrp.com for the public content collections.
+components:
+  schemas:
+    WPRestError:
+      type: object
+      description: The WordPress REST API error envelope. Not RFC 9457 problem+json.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error slug, e.g. rest_forbidden, rest_no_route, rest_invalid_param.
+        message:
+          type: string
+          description: Human-readable message.
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: HTTP status code, repeated in the body.
+      required:
+      - code
+      - message
+  securitySchemes:
+    applicationPassword:
+      type: http
+      scheme: basic
+      description: WordPress Application Passwords over HTTP Basic. Issued from /wp-admin/authorize-application.php by an authenticated site user; not available to the public.
