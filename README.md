@@ -1,4 +1,4 @@
-# Endeavor (endeavor)
+# Endeavor
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,87 +66,105 @@
 
 Endeavor was a global sports and entertainment company representing talent and owning and operating events, with subsidiaries including WME, IMG, and UFC. Following the 2024 take-private transaction by Silver Lake and the separation of TKO Group Holdings (UFC and WWE), the remaining talent, media, marketing, and licensing businesses were rebranded as WME Group. This repository tracks Endeavor as a corporate entity. It publishes no developer program, no API documentation and no OpenAPI; the only machine-readable surfaces on its own hosts are the wmegrp.com WordPress content API, which is anonymously readable, and a live but authentication-gated WordPress MCP Adapter endpoint.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/endeavor/refs/heads/main/apis.yml)
+**Areas:** Sports · Entertainment · Talent · Media · Licensing · Marketing
 
-## Scope
+## Endeavor on APIs.io
 
-- **Type:** Contract
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Endeavor is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/endeavor/](https://apis.io/providers/endeavor/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (2)
 
-- Sports, Entertainment, Talent, Media, Licensing, Marketing
+- [WME Group MCP Server (WordPress MCP Adapter)](https://apis.io/apis/endeavor/mcp/) — A Model Context Protocol server endpoint advertised in the wmegrp.com WordPress REST route index under the "mcp" namespace and served at…
+- [Endeavor Website (WordPress REST)](https://apis.io/apis/endeavor/wmegrp-com-website-wordpress-rest/) — The public WordPress REST API (wp-json) of the Endeavor website at wmegrp.com: the route index of the site's content management system, catalogued as one…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-21
-- **Modified:** 2026-04-28
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-Endeavor / WME Group runs **no developer program**. There is no developer portal, no API
-documentation, no SDK, no published OpenAPI, and no `api.` / `developer.` / `docs.` host in DNS on
-either `wmegrp.com` or `wme.com`. Every `/.well-known/` path returned HTTP 404 on every WME Group
-host probed.
+Model Context Protocol servers that expose the API to agents.
 
-Two machine-readable surfaces do exist on the company's own host, both belonging to its corporate
-site's CMS rather than to a product:
+- [mcp-adapter-default-server](https://apis.io/servers/endeavor/mcp-adapter-default-server/)
 
-### WME Group Content API (WordPress REST wp/v2)
+#### Security (2)
 
-`https://wmegrp.com/wp-json/wp/v2` — the WordPress REST API behind the corporate site. Anonymously
-readable for press releases (6), corporate pages (11), the media library (177), taxonomies, site
-search and content-type discovery; administrative collections (`users`, `settings`, `themes`,
-`plugins`, `menus`, `widgets`, `templates`) return HTTP 401. Page-number pagination with
-`X-WP-Total` / `X-WP-TotalPages` / RFC 8288 `Link` headers; errors use WordPress's
-`{code,message,data.status}` envelope, not RFC 9457.
+Authentication, trust centre, and vulnerability disclosure.
 
-- [OpenAPI (derived)](openapi/endeavor-content-api-openapi.yml) — 120 paths, 256 operations,
-  transcribed mechanically from `https://wmegrp.com/wp-json/`. **Not published by the company**
-  (`x-provider-published: false`).
-- [Error catalog](errors/endeavor-problem-types.yml) · [Rate limits](rate-limits/endeavor-rate-limits.yml)
+- [Endeavor Authentication](https://apis.io/security/endeavor/endeavor-authentication/)
+- [Endeavor Domain Security](https://apis.io/security/endeavor/endeavor-domain-security/)
 
-### WME Group MCP Server (WordPress MCP Adapter)
+#### Plans and pricing (1)
 
-`https://wmegrp.com/wp-json/mcp/mcp-adapter-default-server` — a live Model Context Protocol endpoint
-registered by the site's WordPress MCP Adapter. The namespace index answers HTTP 200; an anonymous
-`tools/list` returns HTTP 401 `rest_forbidden`, as does the backing `wp-abilities/v1` registry, so
-the tool set is **unknown, not empty**.
+Published plans, tiers and prices.
 
-- [MCP server profile](mcp/endeavor-mcp.yml) · [Tool crosswalk](mcp/endeavor-tool-crosswalk.yml)
+- [Endeavor Plans Pricing](https://apis.io/plans/endeavor/endeavor-plans-pricing/)
 
-## Artifacts
+#### Rate limits (1)
 
-- [Authentication](authentication/endeavor-authentication.yml) ·
-  [Conventions](conventions/endeavor-conventions.yml) ·
-  [Conformance](conformance/endeavor-conformance.yml) ·
-  [Lifecycle](lifecycle/endeavor-lifecycle.yml)
-- [Plans and pricing](plans/endeavor-plans-pricing.yml) (none published) ·
-  [Well-known probe](well-known/endeavor-well-known.yml) (all 404) ·
-  [Domain security](security/endeavor-domain-security.yml)
-- [Agent skills](skills/_index.yml) · [llms.txt](llms/endeavor-llms.txt)
+Published request limits.
 
-## Common Properties
+- [Endeavor Rate Limits](https://apis.io/rate-limits/endeavor/endeavor-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://wmegrp.com/)
-- [Privacy Policy](https://wmegrp.com/privacy-policy/)
-- [Terms of Use](https://wmegrp.com/terms-of-use/)
-- [Careers](https://wmeimg.wd1.myworkdayjobs.com/WMEGRP)
-- [LinkedIn](https://www.linkedin.com/company/endeavor-co)
-- [Successor: WME Group](https://wmegrp.com/)
-- [Spinoff: TKO Group Holdings](https://www.tkogrp.com/)
+- [Terms of service](https://wmegrp.com/terms-of-use/)
+- [Privacy policy](https://wmegrp.com/privacy-policy/)
 
-## Businesses
+## API Evangelist rating
 
-WME Group comprises [WME](https://www.wmeagency.com/) (talent agency),
-[160over90](https://www.160over90.com/) (marketing), [IMG Licensing](https://imglicensing.com/) and
-[Pantheon Media Group](https://www.pantheonmedia.com/) (non-scripted content). None of them publishes
-an API. `img.com` — IMG's sports rights, media and events business — serves a real `llms.txt`, but
-IMG sits under **TKO Group Holdings**, not WME Group, so nothing from that host is credited here.
+**Kin Score 16.1** — emerging · rubric 0.25.0 · scored 2026-10-23
 
-## Maintainers
+| Facet | Score |
+|---|---|
+| Discoverability | 60.0 |
+| Contract quality | 0.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 23.2 |
+| Access clarity | 21.1 |
 
-**FN:** Kin Lane
+**Agent readiness 22.8** — agent-aware
 
-**Email:** kin@apievangelist.com
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | platform (partial credit) |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/endeavor/](https://apis.io/providers/endeavor/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Endeavor: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/endeavor/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
